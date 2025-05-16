@@ -1,0 +1,6 @@
+Ordering Policy:
+- Orders can be placed 24/7 via our website or mobile app.
+- Minimum order amount: $5.
+- Orders can be edited within 30 minutes of confirmation.
+- Customers receive an email and SMS confirmation after placing an order.
+- Orders can be cancelled within 12 hours unless already processed for shipment.

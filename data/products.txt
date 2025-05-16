@@ -1,0 +1,52 @@
+Product Name: Premium Cotton T-Shirt
+Brand: UrbanStyle
+Price: $19.99
+Sizes: S, M, L, XL, XXL
+Colors: Black, White, Navy Blue
+Material: 100% organic cotton
+Features: Breathable, soft, machine washable, pre-shrunk
+Returnable: Within 14 days of delivery
+In Stock: Yes
+
+Product Name: SmartWatch Pro V3
+Brand: TechZone
+Price: $89.00
+Warranty: 18 months
+Features: Heart rate monitor, sleep tracking, water resistant, Bluetooth
+Compatible Devices: Android & iOS
+Returnable: Within 7 days (if unopened)
+In Stock: Limited stock available
+
+Product Name: GlowUp Hydrating Face Serum
+Brand: NaturiGlow
+Price: $28.50
+Skin Type: All
+Ingredients: Hyaluronic acid, Vitamin C, Aloe Vera
+Features: Deep hydration, reduces fine lines, brightens skin tone
+Usage: Apply twice daily after cleansing
+Returnable: Only if sealed and unused
+In Stock: Yes
+
+Product Name: Noise-Cancelling Headphones
+Brand: SoundMax
+Price: $120.00
+Battery Life: 30 hours
+Features: Active noise cancellation, wireless, foldable design
+Returnable: Within 10 days of delivery
+In Stock: Yes
+
+Product Name: Ergonomic Office Chair
+Brand: ComfortSeating
+Price: $250.00
+Material: Mesh and steel frame
+Features: Adjustable height, lumbar support, 360-degree swivel
+Returnable: Within 30 days of delivery
+In Stock: Yes
+
+Product Name: Stainless Steel Water Bottle
+Brand: EcoHydrate
+Price: $15.99
+Capacity: 750ml
+Features: BPA-free, double-wall insulation, leak-proof
+Returnable: Within 7 days of delivery
+In Stock: Yes

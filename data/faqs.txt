@@ -1,0 +1,27 @@
+General FAQs
+Q: How can I update my shipping address?
+A: You can update your shipping address from your account before the order is shipped.
+
+Q: Can I use multiple promo codes?
+A: No. Only one promo code can be used per order.
+
+Q: Do you offer gift wrapping?
+A: Yes, available at checkout for $2.50 per item.
+
+Q: My package hasn't arrived yet. What should I do?
+A: First, check your tracking number. If it’s delayed more than 3 days, contact support.
+
+Q: I received the wrong item. How can I fix this?
+A: Submit a return request with a photo of the received product. We'll send the correct item.
+
+Q: The tracking says delivered but I didn’t receive it.
+A: Please wait 24 hours. If still missing, contact support to initiate an investigation.
+
+Q: My card was charged but I didn’t get a confirmation. What should I do?
+A: Contact our support team with the transaction ID for quick assistance.
+
+Q: What payment methods do you accept?
+A: Credit/Debit Card (Visa, MasterCard), PayPal, Apple Pay, and Google Pay.
+
+Q: Why was my payment declined?
+A: Please check with your bank. Ensure billing info matches your card details.
