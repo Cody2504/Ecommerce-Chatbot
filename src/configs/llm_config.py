@@ -1,6 +1,6 @@
 import os
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
-from langchain_google_vertexai import ChatVertexAI
+from langchain_google_genai import ChatGoogleGenerativeAI
 import google.auth
 from dotenv import load_dotenv
 
@@ -16,12 +16,11 @@ def get_embeddings_model():
 
 def get_chat_model():
     """Returns the chat model configuration."""
-    
-    return ChatVertexAI(
+    os.environ["GOOGLE_API_KEY"] = os.getenv("GOOGLE_API_KEY")
+    return ChatGoogleGenerativeAI(
         model="gemini-2.0-flash",
         temperature=0,
-        max_tokens=512,
-        max_retries=6,
-        project=os.getenv("PROJECT_ID"),
-        location="us-central1"
+        max_tokens=None,
+        timeout=None,
+        max_retries=2,
     )

@@ -1,7 +1,8 @@
 import streamlit as st
 from src.configs.llm_config import get_chat_model, get_embeddings_model
 from src.utils.vectorstore_utils import create_vectorstore, load_documents
-from src.chains.llm_route_chain import invoke_llm_with_vectorstore
+from src.chains.llm_route_chain import invoke_llm_with_vectorstore, invoke_llm_with_vectorstore_mmr_improved
+from src.chains.retrieval_qa_chain import invoke_retrieval_qa_chain
 import os
 from dotenv import load_dotenv
 
@@ -53,8 +54,14 @@ if prompt := st.chat_input("Question here..."):
         message_placeholder.markdown("⏳ Processing...")
         
         try:
-            response, doc_info = invoke_llm_with_vectorstore(chat_model, vectorstore, prompt)
+            #Invoke with llm vectorstore using MMR for search_type
+            #response, doc_info = invoke_llm_with_vectorstore_mmr_improved(chat_model, vectorstore, prompt)
             
+            #Invoke with llm vectorstore using similarity search for search_type
+            #response, doc_info = invoke_llm_with_vectorstore(chat_model, vectorstore, prompt)
+
+            #Invoke with retrieval qa chain
+            response, doc_info = invoke_retrieval_qa_chain(chat_model, vectorstore, prompt)
             message_placeholder.empty()
             if isinstance(response, list):
                 for item in response:

@@ -39,8 +39,9 @@ def route_to_doc_type(llm, query, doc_types):
     prompt = ChatPromptTemplate.from_messages([
         ("system", system_msg),
         ("human", "{query}"),
-    ]).format(query=query)
-    result = llm.invoke(prompt)
+    ])
+    chain = prompt | llm
+    result = chain.invoke({"query": query})
     return str(result.content).strip().lower()
 
 def invoke_llm_with_vectorstore(llm, vectorstore, query):
@@ -48,6 +49,7 @@ def invoke_llm_with_vectorstore(llm, vectorstore, query):
     # Define possible doc_types based on your corpus
     doc_types = ["returns", "refund", "faqs", "ordering", "products", "shipping", "common_issue"]
     doc_type = route_to_doc_type(llm, query, doc_types)
+    
     # Retrieve only relevant docs for that doc_type
     docs = vectorstore.similarity_search(f"{doc_type} {query}", k=1)
     context = docs[0].page_content if docs else "No relevant documentation found."
@@ -70,3 +72,57 @@ def invoke_llm_with_vectorstore(llm, vectorstore, query):
     parser = CustomListOutputParser(separator="\n")
     result = llm.invoke(prompt)
     return parser.parse(str(result.content)), doc_info
+
+def invoke_llm_with_vectorstore_mmr_improved(llm, vectorstore, query, doc_types=None):
+    if doc_types is None:
+        doc_types = ["returns", "refund", "faqs", "ordering", "products", "shipping", "common_issue"]
+    
+    doc_type = route_to_doc_type(llm, query, doc_types)
+    
+    mmr_params = {
+        "query": f"{doc_type} {query}",
+        "k": 1,                 
+        "fetch_k": 12,           
+        "lambda_mult": 0.75     
+    }
+    
+    docs = vectorstore.max_marginal_relevance_search(**mmr_params)
+    
+    if not docs:
+        return "I couldn't find relevant information to answer your question.", None
+    
+    context = "\n\n".join([
+        f"Document {i+1}:\n{doc.page_content}" 
+        for i, doc in enumerate(docs)
+    ])
+    
+    doc_info = {}
+    if docs:
+        metadata = docs[0].metadata
+        doc_info = {
+            "source": metadata.get("source", "").split("/")[-1].split(".")[0] if "source" in metadata else doc_type,
+            "product_name": metadata.get("product_name", ""),
+            "relevance_score": metadata.get("score", "N/A")
+        }
+    
+    source_info = f"{doc_info.get('source', '')}"
+    if doc_info.get('product_name'):
+        source_info += f" - {doc_info['product_name']}"
+    
+    response_prompt = ChatPromptTemplate.from_messages([
+        ("system", "You are an assistant for an e-commerce platform. Use the following context to answer the query."),
+        ("system", "Context: {context}"),
+        ("human", "{query}")
+    ])
+    
+    formatted_prompt = response_prompt.format(context=context, query=query)
+    result = llm.invoke(formatted_prompt)
+    
+    # Parse and return the response
+    parser = CustomListOutputParser(separator="\n")
+    try:
+        parsed_response = parser.parse(str(result.content))
+        return parsed_response, source_info
+    except Exception:
+        # Fallback if parsing fails
+        return str(result.content), source_info
